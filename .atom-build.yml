@@ -1,0 +1,10 @@
+cmd: ./transform_mds.sh {FILE_ACTIVE}; rm Thesis_report.lol; pdflatex -synctex=1 -interaction=nonstopmode -shell-escape Thesis_report.tex
+name: "quick build"
+targets:
+  scratch:
+    cmd: ./transform_mds.sh; rm Thesis_report.lol; pdflatex -synctex=1 -interaction=nonstopmode -shell-escape Thesis_report.tex; bibtex Thesis_report.aux; rm Thesis_report.lol; pdflatex -synctex=1 -interaction=nonstopmode -shell-escape Thesis_report.tex; rm Thesis_report.lol; pdflatex -synctex=1 -interaction=nonstopmode -shell-escape Thesis_report.tex
+  all:
+    cmd: ./transform_mds.sh; rm Thesis_report.lol; pdflatex -synctex=1 -interaction=nonstopmode -shell-escape Thesis_report.tex
+  makeindex:
+    cmd: makeindex Thesis_report.nlo -s nomencl.ist -o Thesis_report.nls
+

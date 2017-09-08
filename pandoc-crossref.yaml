@@ -1,0 +1,6 @@
+figPrefix: "figure"
+eqnPrefix: "equation"
+tblPrefix: "table"
+lstPrefix: "listing"
+secPrefix: "section"
+

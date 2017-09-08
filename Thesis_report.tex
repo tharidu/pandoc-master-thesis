@@ -1,0 +1,321 @@
+\documentclass[11pt,a4paper,abstractoff,titlepage,final,parskip=half*,BCOR10mm,appendixprefix=true]{scrreprt}%Print
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[pdftex]{graphicx}
+\usepackage{color}
+\usepackage[table]{xcolor}
+\usepackage[numbers]{natbib}
+\usepackage{tabularx}
+\usepackage{subfigure}
+\usepackage{listings,chngcntr}
+\usepackage{rotating}
+\usepackage{lmodern}
+\usepackage[intoc]{nomencl}
+\usepackage{amsmath}
+\usepackage{microtype}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{pdfpages}
+% \usepackage[cachedir=/tmp/mint]{minted}
+\usepackage[automark, komastyle, headsepline]{scrpage2}
+
+
+\usepackage[pdfpagelabels]{hyperref}
+
+\hypersetup{
+pdfstartpage=1,
+pdftitle={Title},
+pdfsubject={Degree project in computer science and engineering at KTH Information and Communication Technology},
+pdfauthor={Author},%
+pdfkeywords={pdfkeywords},
+pdfcreator={Author},
+pdfproducer={LaTeX with hyperref},
+pdfdisplaydoctitle=true,
+pdflang=en,
+plainpages=false,
+}
+
+\def\tightlist{}
+
+%*****************************************
+%Layout designing for Figures and Tables
+%*****************************************
+
+
+\renewcommand\theequation{\thechapter.\arabic{equation}}
+\makeatletter \@addtoreset{equation}{chapter} \makeatother
+
+\renewcommand\thefigure{\thechapter.\arabic{figure}}
+\makeatletter \@addtoreset{figure}{chapter} \makeatother
+
+\renewcommand\thetable{\thechapter.\arabic{table}}
+\makeatletter \@addtoreset{table}{chapter} \makeatother
+
+\setkomafont{caption}{\footnotesize\itshape}
+\setkomafont{captionlabel}{\footnotesize\itshape}
+
+\renewcommand{\figurename}{Fig.}
+%\renewcommand{\equationname}{Eq.}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+%*****************************************
+%Layout designing for Figures and Tables
+%*****************************************
+%
+
+
+\pdfminorversion=6
+\colorlet{chapter}{black}
+\addtokomafont{chapter}{\color{chapter}}
+
+\makeatletter
+\renewcommand*{\chapterformat}{
+\begingroup
+\setlength{\unitlength}{1mm}%
+\begin{picture}(20,30)(0,5)%
+
+%----  cmd \line(1,0) is use to draw straight horizontalline----
+\put(20,15){\line(1,0){\dimexpr
+\textwidth-20\unitlength\relax\@gobble}}%
+\put(0,0){\makebox(20,20)[r]{
+\fontsize{28\unitlength}{28\unitlength}\selectfont\thechapter
+\kern-.04em
+}}
+
+%----- for additional chapter lable--------- which not required here -------------
+\put(20,15){\makebox(\dimexpr
+\textwidth-20\unitlength\relax\@gobble,\ht\strutbox\@gobble)[l]{
+\ \normalsize\color{black}\chapapp~\thechapter\autodot
+}}
+\end{picture}
+\endgroup
+}
+
+
+%*****************************
+% Abbreviations layout design
+%*****************************
+
+%
+\renewcommand{\nomname}{Abbreviations}% Dots between abbreviations and text
+\setlength{\nomlabelwidth}{.20\hsize}
+\renewcommand{\nomlabel}[1]{#1 \dotfill}
+\setlength{\nomitemsep}{-\parsep}
+\makenomenclature
+
+%****************
+
+
+%
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{2}
+
+\pagestyle{scrheadings}
+
+
+%*****************************************
+% Layout designing for Header and Footer
+%*****************************************
+
+
+
+\clearscrheadfoot
+\clearscrplain
+   \cfoot{\pagemark}
+   \ihead{\headmark}
+
+%*****************************************
+
+\makeatletter
+%% change \numberline so that it will print "Appendix A"
+\newcommand\appendix@numberline[1]{\appendixname\ #1\autodot\ }
+\g@addto@macro\appendix{%
+  \addtocontents{toc}{
+    \let\protect\numberline\protect\appendix@numberline}%
+}
+\makeatother
+
+\makeatletter
+\AtBeginDocument{\let\c@listing\c@lstlisting}
+\makeatother
+
+% To fix number counter with figures
+% \counterwithin{listing}{chapter}
+
+
+%------ the real document begins here ------
+\begin{document}
+
+
+%------ Layout Titel ------
+\pagenumbering{roman}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Deckblatt
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+  \includegraphics[height=6cm]{kth_cmyk_info_comm_tech}\\
+  \vspace{.5cm}
+  \huge{\normalfont \scshape KTH Royal Institute of Technology}\\
+  \vspace{.5cm}
+  \Large{\normalfont \scshape School of Information and Communication Technology}\\
+  \vspace{3.5cm}
+  \normalsize Degree project in computer science and engineering\\
+  \vspace{2mm}
+  \Large{Title}
+  \vspace{2cm}
+\end{center}
+\begin{tabular}{ll}
+\noindent Author: & author \\ [6ex]
+\noindent Supervisor: & ******************************\\ [1ex]
+\noindent Co-supervisors: & ****************************** \\
+                          & ****************************** \\[1ex]
+\noindent Examiner:  &********************, KTH, Stockholm, Sweden\\
+
+\end{tabular}
+\end{titlepage}
+\newpage
+
+
+
+
+% \thispagestyle{empty}
+% \cleardoublepage
+
+\begin{abstract}
+
+\subsubsection*{\centering\abstractname}
+
+\input{./chapters-tex/abstract.tex}
+
+
+\end{abstract}
+
+\renewcommand\abstractname{Referat}
+
+\begin{abstract}
+
+\subsubsection*{\centering\abstractname}
+
+\input{./chapters-tex/abstract-sv.tex}
+
+\end{abstract}
+
+
+% \thispagestyle{empty}
+% \cleardoublepagez
+
+
+% \clearpage
+% \thispagestyle{empty}
+% \renewcommand*{\chapterpagestyle}{empty}
+\chapter*{Acknowledgments}
+
+First I would like to offer...\\
+
+Stockholm, 06 September 2017\\
+\textit{Author}
+
+
+% \clearpage
+% \renewcommand*{\chapterpagestyle}{plain}
+
+
+
+% \thispagestyle{empty}
+% \cleardoublepage
+
+
+
+%*********************************
+% Table of contents and Figures list
+%*********************************
+%
+\tableofcontents
+% \newpage
+\listoffigures
+% \lstlistoflistings
+%\newpage
+% \listoftables
+%*********************************%*********************************
+% Abbreviations
+%*********************************
+
+% If there is any
+\include{Abbreviations}
+
+% \thispagestyle{empty}
+% \cleardoublepage
+
+%*********************************
+
+
+\pagenumbering{arabic}
+
+%**************************
+% Including Chapter files
+%**************************
+
+%\thispagestyle{empty}
+\cleardoublepage
+
+
+\chapter{Introduction}
+\label{chap_Intro}
+
+\input{./chapters-tex/introduction.tex}
+
+\chapter{Background \& Related Work}    % chapter 2
+\label{chap_Background}
+
+\input{./chapters-tex/background.tex}
+
+\chapter{Chapter 3}    % chapter 3
+\label{chap_3}
+
+\input{./chapters-tex/chp3.tex}
+
+\chapter{Chapter 4}    % chapter 4
+\label{chap_4}
+
+\input{./chapters-tex/chp4.tex}
+
+\chapter{Chapter 5}    % chapter 5
+\label{chap_5}
+
+\input{./chapters-tex/chp5.tex}
+
+\chapter{Evaluation}    % chapter 6
+\label{chap_eval}
+
+\input{./chapters-tex/evaluation.tex}
+
+\chapter{Conclusion}    % chapter 7
+\label{chap_conc}
+
+\input{./chapters-tex/conclusion.tex}
+
+% \appendix
+% \chapter{Test}
+% \input{./chapters-tex/appendix.tex}
+
+%\thispagestyle{empty}
+%\cleardoublepage								% Remove the comment for a new chapter
+
+%%------ bibliography ------
+\bibliographystyle{plain}
+\bibliography{Thesis}
+\thispagestyle{empty}
+\cleardoublepage
+\include{Declaration}
+
+% Include generated KTH cover pdf file here
+
+% \includepdf[pages=2]{kth-cover.pdf}
+%------ end of document ------
+\end{document}
